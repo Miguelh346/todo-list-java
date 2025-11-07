@@ -27,7 +27,14 @@ public class Main {
                 addTask(input.substring(4));
             }
             else if(input.equalsIgnoreCase("list tasks")){
+                System.out.println("\nYour curent task list:");
                 showTasks();
+            }
+            else if(input.equalsIgnoreCase("delete")){
+                if(!tasks.isEmpty())
+                    removeTask(scan);
+                else
+                    System.out.println("No Tasks to delete. Try adding a task!");
             }
 
         
@@ -59,7 +66,7 @@ public class Main {
         }
         else{
             
-            System.out.println("\nYour curent task list:");
+            
             int i = 1;
             for(String taskName: tasks){
                 
@@ -72,6 +79,33 @@ public class Main {
 
     
     //delete task
+    private static void removeTask(Scanner scan){
+
+        System.out.println("\nCurrent Tasks");
+        showTasks();
+        
+        System.out.println("Enter the number of the task to delete: ");
+                
+        String remove = scan.nextLine();
+
+        int numRemove;       
+        try {
+                numRemove = Integer.parseInt(remove) -1;
+        } catch (Exception e) {
+                System.out.println("Invalid input received. Please try again");
+                return;
+        }
+        
+        
+        
+        if(numRemove < tasks.size() && numRemove >= 0){
+            tasks.remove(numRemove);
+            System.out.println("\nUpdated task list:");
+            showTasks();
+        }
+        else
+            System.out.println("Invalid number entered. Please try again.");
+    }
 
     //save task list
 
